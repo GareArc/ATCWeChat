@@ -1,0 +1,101 @@
+{
+	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
+		{
+			"path": "pages/index/index",
+			"style": {
+				"navigationBarTitleText": "主页",
+				"usingComponents": {
+
+				}
+			}
+		},
+		{
+			"path": "pages/basicPage/basicPage",
+			"style": {
+				"navigationBarTitleText": "基础设定",
+				"usingComponents": {
+					"van-checkbox": "/wxcomponents/checkbox/index",
+					"van-checkbox-group": "/wxcomponents/checkbox-group/index",
+					"van-cell": "/wxcomponents/cell/index",
+					"van-cell-group": "/wxcomponents/cell-group/index",
+					"van-picker": "/wxcomponents/picker/index",
+					"van-row": "/wxcomponents/row/index",
+					"van-col": "/wxcomponents/col/index",
+					"van-field": "/wxcomponents/field/index"
+
+				}
+			}
+		},
+		{
+			"path": "pages/addPage/addPage",
+			"style": {
+				"navigationBarTitleText": "添加物品",
+				"usingComponents": {
+					"van-checkbox": "/wxcomponents/checkbox/index",
+					"van-checkbox-group": "/wxcomponents/checkbox-group/index",
+					"van-cell": "/wxcomponents/cell/index",
+					"van-cell-group": "/wxcomponents/cell-group/index",
+					"van-tab": "/wxcomponents/tab/index",
+					"van-tabs": "/wxcomponents/tabs/index",
+					"van-row": "/wxcomponents/row/index",
+					"van-col": "/wxcomponents/col/index",
+					"van-field": "/wxcomponents/field/index",
+					"van-notify": "/wxcomponents/notify/index"
+				}
+			}
+		},
+		{
+			"path": "pages/historyPage/historyPage",
+			"style": {
+				"navigationBarTitleText": "历史记录",
+				"usingComponents": {
+					"van-tab": "/wxcomponents/tab/index",
+					"van-tabs": "/wxcomponents/tabs/index"
+				}
+			}
+		}
+	],
+	"globalStyle": {
+		"navigationBarTextStyle": "black",
+		"navigationBarTitleText": "uni-app",
+		"navigationBarBackgroundColor": "#F8F8F8",
+		"backgroundColor": "#F8F8F8",
+		"usingComponents": {
+			"van-row": "/wxcomponents/row/index",
+			"van-col": "/wxcomponents/col/index",
+			"van-notify": "/wxcomponents/notify/index"
+		}
+	},
+	"tabBar": {
+		"color": "#7A7E83",
+		"selectedColor": "#3cc51f",
+		"borderStyle": "black",
+		"backgroundColor": "#ffffff",
+		"list": [
+			{
+				"pagePath": "pages/index/index",
+				"iconPath": "static/tab/home.png",
+				"selectedIconPath": "static/tab/home_selected.png",
+				"text": "主页"
+			},
+			{
+				"pagePath": "pages/basicPage/basicPage",
+				"iconPath": "static/tab/config.png",
+				"selectedIconPath": "static/tab/config_selected.png",
+				"text": "基础"
+			},
+			{
+				"pagePath": "pages/addPage/addPage",
+				"iconPath": "static/tab/add.png",
+				"selectedIconPath": "static/tab/add_selected.png",
+				"text": "添加"
+			},
+			{
+				"pagePath": "pages/historyPage/historyPage",
+				"iconPath": "static/tab/history.png",
+				"selectedIconPath": "static/tab/history_selected.png",
+				"text": "历史"
+			}]
+	}
+
+}

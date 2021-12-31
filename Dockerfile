@@ -11,4 +11,4 @@ WORKDIR /app
 COPY --from=build /app/target/atc-wechat-api-0.0.1-SNAPSHOT.jar .
 
 EXPOSE 8080
-CMD ["java", "-jar", "/app/atc-wechat-api-0.0.1-SNAPSHOT.jar"]
+CMD ["java", "-jar", "/app/atc-wechat-api-0.0.1-SNAPSHOT.jar", "--atc.admin.password=atcadmin"]

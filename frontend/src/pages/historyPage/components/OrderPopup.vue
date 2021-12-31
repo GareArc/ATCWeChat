@@ -1,5 +1,32 @@
 <template>
   <view v-if="order !== null" class="container">
+<!--    password screen-->
+    <van-popup :show="showPasswordInput"
+               :closeable="true"
+               custom-style="width: 100%"
+               :safe-area-inset-top="true"
+               :close-on-click-overlay="true"
+               overlay-style="height: 200%"
+               @close.native="onPopupClose">
+      <view class="overlay-wrapper">
+        <van-field label="密码"
+                   size="large"
+                   center
+                   clearable
+                   :border="true"
+                   :password="true"
+                   placeholder="输入密码"
+                   @blur.native="onPasswordChange"
+                   use-button-slot>
+          <template #button>
+            <van-button slot="button" size="small" type="danger"
+                        @click.native="deleteOrder">
+              确认
+            </van-button>
+          </template>
+        </van-field>
+      </view>
+    </van-popup>
 <!--    targets total-->
     <van-row style="width: 100%">
       <van-cell-group title="总计">
@@ -30,8 +57,8 @@
     <van_row style="width: 100%">
       <van-cell-group title="三人部分">
         <view v-if="order.ThreePeople.length === 0">暂无</view>
-        <van-cell v-else v-for="item in order.ThreePeople"
-                  :key="item"
+        <van-cell v-else v-for="(item, index) in order.ThreePeople"
+                  :key="index"
                   title="物品"
                   :label="getItemDesc(item)"
                   :value="`${item.quantity} * $${item.price}`" />
@@ -41,8 +68,8 @@
     <van-row style="width: 100%">
       <van-cell-group :title="order.Target1Info">
         <view class="empty-list-display" v-if="order.Target1.length === 0">暂无</view>
-        <van-cell v-else v-for="item in order.Target1"
-                  :key="item"
+        <van-cell v-else v-for="(item, index) in order.Target1"
+                  :key="index"
                   title="物品"
                   :label="getItemDesc(item)"
                   :value="`${item.quantity} * $${item.price}`" />
@@ -52,14 +79,21 @@
     <van-row style="width: 100%">
       <van-cell-group :title="order.Target2Info">
         <view class="empty-list-display" v-if="order.Target2.length === 0">暂无</view>
-        <van-cell v-else v-for="item in order.Target2"
-                  :key="item"
+        <van-cell v-else v-for="(item, index) in order.Target2"
+                  :key="index"
                   title="物品"
                   :label="getItemDesc(item)"
                   :value="`${item.quantity} * $${item.price}`" />
       </van-cell-group>
     </van-row>
     <view class="end">----- END-----</view>
+    <!--    delete button-->
+    <van-row style="width: 100%">
+      <view class="delete-button-wrapper">
+        <van-button type="warning" custom-style="width: 50vw"
+                    @tap.native="showDeletePopup">删除</van-button>
+      </view>
+    </van-row>
   </view>
 </template>
 
@@ -71,6 +105,12 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+.overlay-wrapper{
+  margin-top: 5vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 .empty-list-display{
   display: flex;
@@ -87,6 +127,13 @@
   white-space: nowrap;
   margin: 1vh 0 1vh 0;
   width: 100%;
+}
+.delete-button-wrapper{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin-top: 1vh;
 }
 .end{
   margin-top: 2vh;

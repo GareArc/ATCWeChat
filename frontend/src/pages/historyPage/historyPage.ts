@@ -33,7 +33,10 @@ export default defineComponent({
             isLoading: true,
             showPopup: false,
             orderMetaList: [] as OrderMeta[],
-            selectedOrder: null as Order|null,
+            selectedOrder: {
+                order: null as Order|null,
+                uuid: null as string|null
+            },
         }
     },
     methods: {
@@ -62,12 +65,19 @@ export default defineComponent({
             // //TODO: end
 
             await getOrderByUUID(meta.uuid)
-              .then(value => (this as any).selectedOrder = value.data);
+              .then(value => {
+                  (this as any).selectedOrder.order = value.data;
+                  (this as any).selectedOrder.uuid = meta.uuid;
+              });
             (this as any).isLoading = false;
             (this as any).showPopup = true;
         },
         onPopupClose(): void{
             (this as any).showPopup = false;
+        },
+        async onDeleteClosePopup(): Promise<void>{
+            await this.loadOrderMetas();
+            this.onPopupClose();
         }
     },
     computed: {

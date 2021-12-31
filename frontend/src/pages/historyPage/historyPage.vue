@@ -13,7 +13,9 @@
                custom-style="height: 100%; width: 100%"
                :safe-area-inset-top="true"
                @close.native="onPopupClose">
-      <order-popup v-if="selectedOrder" :order="selectedOrder" />
+      <order-popup v-if="selectedOrder.order"
+                   :order="selectedOrder.order"
+                   :uuid="selectedOrder.uuid" @close-order-popup="onDeleteClosePopup"/>
     </van-popup>
 <!--    title-->
 <!--    <van-row style="width: 100%">-->

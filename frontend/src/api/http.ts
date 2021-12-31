@@ -5,7 +5,7 @@ import { Response } from "@/models/Response";
 
 // axios.defaults.adapter = mpAdapter;
 const instance = axios.create({
-    baseURL: config.baseUrl.default,
+    baseURL: config.baseUrl.test,
     adapter: mpAdapter as AxiosAdapter,
     headers: {
         "Content-Type": "application/json"
@@ -53,7 +53,7 @@ Perform http request to backend with method POST.
     a Response, or the type of data is not compatible with the one in model,
     check your code or contact backend developers.
 */
-export async function post<T>(url: string, data: any): Promise<Response<T>> {
+export async function post<T>(url: string, data: any={}): Promise<Response<T>> {
     return new Promise<Response<T>>((resolve, reject) => {
         instance
           .post<Response<T>>(url, data)

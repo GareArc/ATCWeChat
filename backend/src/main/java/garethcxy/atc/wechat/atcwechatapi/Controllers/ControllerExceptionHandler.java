@@ -16,6 +16,6 @@ public class ControllerExceptionHandler extends ResponseEntityExceptionHandler {
         r.setCode(e.getCode());
         r.setErrorDescription(e.getDescription());
         r.setData(e.getCode());
-        return new ResponseEntity<>(r, HttpStatus.INTERNAL_SERVER_ERROR);
+        return new ResponseEntity<>(r, HttpStatus.OK);
     }
 }

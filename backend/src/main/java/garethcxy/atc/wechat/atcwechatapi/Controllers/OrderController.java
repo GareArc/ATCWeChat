@@ -5,6 +5,7 @@ import garethcxy.atc.wechat.atcwechatapi.Entities.Exceptions.InternalError;
 import garethcxy.atc.wechat.atcwechatapi.Entities.Order;
 import garethcxy.atc.wechat.atcwechatapi.Entities.Response;
 import garethcxy.atc.wechat.atcwechatapi.Services.OrderService;
+import garethcxy.atc.wechat.atcwechatapi.Utils.PathDecoder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -38,18 +39,19 @@ public class OrderController{
         return r;
     }
 
-    @PostMapping("/clear")
+    @GetMapping("/clear")
     public Response<Boolean> clearAllOrders(@RequestParam("password") String password) throws InternalError{
         Response<Boolean> r = new Response<>();
-        r.setData(orderService.clearOrders(password));
+        r.setData(orderService.clearOrders(PathDecoder.decodePathParam(password)));
         return r;
     }
 
-    @PostMapping("/delete")
+    @GetMapping("/delete")
     public Response<Boolean> deleteOrder(@RequestParam("password") String password,
                                          @RequestParam("uuid") String uuid) throws InternalError{
         Response<Boolean> r = new Response<>();
-        r.setData(orderService.deleteOrderByUUID(password, uuid));
+        r.setData(orderService.deleteOrderByUUID(PathDecoder.decodePathParam(password),
+                PathDecoder.decodePathParam(uuid)));
         return r;
     }
 }

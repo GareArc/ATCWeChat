@@ -14,3 +14,19 @@ export async function addNewOrder(order: Order): Promise<Response<boolean>>{
 export async function getOrderByUUID(uuid: string): Promise<Response<Order>>{
     return get<Order>(`/order/uuid/${uuid}`);
 }
+
+export async function deleteOrderByUUID(password:string, uuid: string) {
+    const data = {
+        password: encodeURIComponent(password),
+        uuid: encodeURIComponent(uuid)
+    };
+    // console.log(JSON.stringify(data));
+    return get<Order>("/order/delete", data);
+}
+
+export async function clearOrders(password:string, uuid: string) {
+    const data = {
+        password: encodeURIComponent(password),
+    };
+    return get<Order>("/order/clear", data);
+}

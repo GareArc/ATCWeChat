@@ -60,7 +60,7 @@ public class OrderDAO extends BaseDAO<Order>{
     }
 
     public void delete(String uuid) throws InternalError{
-        String sql = String.format("DELETE * FROM %s WHERE uuid = ?;", TableType.ORDER.getTbName());
+        String sql = String.format("DELETE FROM %s WHERE uuid = ?;", TableType.ORDER.getTbName());
         manager.modifyQuery(sql, uuid);
     }
 

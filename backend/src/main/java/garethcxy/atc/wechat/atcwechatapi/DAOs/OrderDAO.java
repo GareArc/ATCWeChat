@@ -16,7 +16,7 @@ import java.util.UUID;
 
 @Repository
 public class OrderDAO extends BaseDAO<Order>{
-    private final int limit = 100;
+    private final int limit = 50;
 
     @Autowired
     private JsonUtils jsonUtils;
@@ -33,7 +33,7 @@ public class OrderDAO extends BaseDAO<Order>{
         UUID uuid = UUID.randomUUID();
         String time = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
         // first check limit
-        String sql = String.format("DELETE FROM %s WHERE uuid NOT IN (SELECT uuid FROM %s ORDER BY time DESC LIMIT %d)",
+        String sql = String.format("DELETE FROM %s WHERE uuid NOT IN (SELECT uuid FROM %s ORDER BY time DESC LIMIT %d);",
                 TableType.ORDER.getTbName(), TableType.ORDER.getTbName(), limit);
         manager.performQuery(sql);
         // insert new item
@@ -42,7 +42,9 @@ public class OrderDAO extends BaseDAO<Order>{
     }
 
     public List<OrderMeta> getAllOrderMeta() throws InternalError{
-        return manager.selectQueryRow(String.format("SELECT uuid, time FROM %s", TableType.ORDER.getTbName()), OrderMeta.class);
+        return manager.selectQueryRow(String.format("SELECT uuid, time FROM %s ORDER BY time DESC;",
+                TableType.ORDER.getTbName()),
+                OrderMeta.class);
     }
 
     public Order getOrderByUUID(String uuid) throws InternalError{
@@ -52,11 +54,20 @@ public class OrderDAO extends BaseDAO<Order>{
         return jsonUtils.parseToObject(order.get(0), Order.class);
     }
 
+    public void clear() throws InternalError{
+        String sql = String.format("DELETE * FROM %s;", TableType.ORDER.getTbName());
+        manager.performQuery(sql);
+    }
+
+    public void delete(String uuid) throws InternalError{
+        String sql = String.format("DELETE * FROM %s WHERE uuid = ?;", TableType.ORDER.getTbName());
+        manager.modifyQuery(sql, uuid);
+    }
 
     private void init() throws InternalError {
-        String sql = "CREATE TABLE IF NOT EXISTS %s (\n" +
+        String sql = "CREATE TABLE IF NOT EXISTS %s (" +
                 "uuid text PRIMARY KEY," +
-                "time text NOT NULL,\n" +
+                "time text NOT NULL," +
                 "content text" +
                 ");";
         sql = String.format(sql, TableType.ORDER.getTbName());

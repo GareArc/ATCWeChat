@@ -10,7 +10,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Response<T> {
-    T data;
-    String errorDescription;
+    T data = null;
+    String errorDescription = "";
     int code = 0;
 }

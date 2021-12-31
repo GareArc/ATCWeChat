@@ -1,6 +1,5 @@
 package garethcxy.atc.wechat.atcwechatapi.Controllers;
 
-
 import garethcxy.atc.wechat.atcwechatapi.Entities.Database.Order.OrderMeta;
 import garethcxy.atc.wechat.atcwechatapi.Entities.Exceptions.InternalError;
 import garethcxy.atc.wechat.atcwechatapi.Entities.Order;
@@ -36,6 +35,21 @@ public class OrderController{
     public Response<Order> getOrderByUUID(@PathVariable("uuid") String uuid) throws InternalError{
         Response<Order> r = new Response<>();
         r.setData(orderService.getOrderByUUID(uuid));
+        return r;
+    }
+
+    @PostMapping("/clear")
+    public Response<Boolean> clearAllOrders(@RequestParam("password") String password) throws InternalError{
+        Response<Boolean> r = new Response<>();
+        r.setData(orderService.clearOrders(password));
+        return r;
+    }
+
+    @PostMapping("/delete")
+    public Response<Boolean> deleteOrder(@RequestParam("password") String password,
+                                         @RequestParam("uuid") String uuid) throws InternalError{
+        Response<Boolean> r = new Response<>();
+        r.setData(orderService.deleteOrderByUUID(password, uuid));
         return r;
     }
 }

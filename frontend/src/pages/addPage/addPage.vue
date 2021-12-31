@@ -10,6 +10,9 @@
       <van-tab title="提交">
         <submit-order-tab></submit-order-tab>
       </van-tab>
+      <van-tab title="test">
+        <order-popup :order="order"></order-popup>
+      </van-tab>
     </van-tabs>
   </view>
 </template>

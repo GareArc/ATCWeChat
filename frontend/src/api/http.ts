@@ -1,10 +1,12 @@
-import axios from "axios-miniprogram";
+import axios, {AxiosAdapter} from 'axios';
+import mpAdapter from 'axios-miniprogram-adapter';
 import config from "@/api/config";
 import { Response } from "@/models/Response";
 
+// axios.defaults.adapter = mpAdapter;
 const instance = axios.create({
     baseURL: config.baseUrl.default,
-    timeout: 3600,
+    adapter: mpAdapter as AxiosAdapter,
     headers: {
         "Content-Type": "application/json"
     }

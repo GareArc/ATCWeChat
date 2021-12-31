@@ -5,7 +5,7 @@ import { Response } from "@/models/Response";
 
 // axios.defaults.adapter = mpAdapter;
 const instance = axios.create({
-    baseURL: config.baseUrl.test,
+    baseURL: config.baseUrl.default,
     adapter: mpAdapter as AxiosAdapter,
     headers: {
         "Content-Type": "application/json"

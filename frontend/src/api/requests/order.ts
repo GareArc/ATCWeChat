@@ -20,7 +20,6 @@ export async function deleteOrderByUUID(password:string, uuid: string) {
         password: encodeURIComponent(password),
         uuid: encodeURIComponent(uuid)
     };
-    // console.log(JSON.stringify(data));
     return get<Order>("/order/delete", data);
 }
 

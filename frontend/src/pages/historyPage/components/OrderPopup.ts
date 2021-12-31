@@ -63,13 +63,11 @@ export default defineComponent({
             }
             this.showPasswordInput = false;
             this.$emit("close-order-popup");
-            // await wx.navigateBack();
         },
         onPopupClose(): void{
             (this as any).showPopup = false;
         },
         onPasswordChange(e: any): void{
-            console.log(e.detail.value);
             (this as any).password = e.detail.value;
         },
         showDeletePopup(): void{

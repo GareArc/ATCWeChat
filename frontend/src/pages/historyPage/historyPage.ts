@@ -24,7 +24,7 @@ export default defineComponent({
         // @ts-ignore
         OrderPopup
     },
-    async mounted() {
+    async onShow() {
         await (this as any).loadOrderMetas();
 
     },

@@ -10,4 +10,9 @@ import {Order} from "../../models/Order";
 export default class OrderStore extends VuexModule{
     currentOrder: Order = new Order();
     targets = ["Gareth", "Charlie", "Ethan"];
+
+    @Mutation
+    public setCurrentOrder(order: Order): void{
+        this.currentOrder = order;
+    }
 }

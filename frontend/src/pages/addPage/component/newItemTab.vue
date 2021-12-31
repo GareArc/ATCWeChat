@@ -97,7 +97,7 @@
         <van-button type="primary"
                     custom-style="width:50vw"
                     @click="submit">
-          提交
+          添加
         </van-button>
       </van-row>
     </view>

@@ -9,6 +9,7 @@ import {vanOverlay} from "@/wxcomponents/overlay/index";
 import {getModule} from "vuex-module-decorators";
 import OrderStore from "@/store/modules/OrderStore";
 import {addNewOrder} from "@/api/requests/order";
+import {Order} from "@/models/Order";
 
 export default defineComponent({
     components: {
@@ -27,6 +28,7 @@ export default defineComponent({
             this.isLoading = true;
             await addNewOrder(this.orderStore.currentOrder)
               .then(value => value);
+            this.orderStore.setCurrentOrder(new Order());
             this.isLoading = false;
         }
     },

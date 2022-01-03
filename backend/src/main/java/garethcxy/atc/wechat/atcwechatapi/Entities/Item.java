@@ -7,7 +7,8 @@ import lombok.Setter;
 @Getter
 @Setter
 public class Item {
-    private String description = "Item";
+    @JsonProperty(value = "description")
+    private String description = "物品";
     @JsonProperty(value = "price")
     private double price;
     @JsonProperty(value = "quantity")

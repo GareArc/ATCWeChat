@@ -1,12 +1,21 @@
 <template>
-  <view v-if="order !== null" class="container">
+  <scroll-view v-if="order !== null"
+               class="container" scroll-y>
+<!--    dialog-->
+    <van-dialog id="van-dialog" />
+<!--    loading screen-->
+    <van-overlay :show="isLoading" >
+      <view class="loading-wrapper">
+        <van-loading color="#47cd5d"/>
+      </view>
+    </van-overlay>
 <!--    password screen-->
     <van-popup :show="showPasswordInput"
-               :closeable="true"
+               closeable
                custom-style="width: 100%"
-               :safe-area-inset-top="true"
-               :close-on-click-overlay="true"
-               overlay-style="height: 200%"
+               safe-area-inset-top
+               close-on-click-overlay
+               :lock-scroll="false"
                @close.native="onPopupClose">
       <view class="overlay-wrapper">
         <van-field label="密码"
@@ -56,7 +65,7 @@
 <!--    three people list-->
     <van_row style="width: 100%">
       <van-cell-group title="三人部分">
-        <view v-if="order.ThreePeople.length === 0">暂无</view>
+        <view v-if="order.ThreePeople.length === 0" class="empty-list-display">暂无</view>
         <van-cell v-else v-for="(item, index) in order.ThreePeople"
                   :key="index"
                   title="物品"
@@ -94,7 +103,7 @@
                     @tap.native="showDeletePopup">删除</van-button>
       </view>
     </van-row>
-  </view>
+  </scroll-view>
 </template>
 
 <script lang="ts" src="./OrderPopup.ts"/>
@@ -105,6 +114,8 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  height: 100%;
+  overflow-y: scroll;
 }
 .overlay-wrapper{
   margin-top: 5vh;
@@ -112,10 +123,18 @@
   align-items: center;
   justify-content: center;
 }
+.loading-wrapper{
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 .empty-list-display{
   display: flex;
   align-items: center;
   justify-content: center;
+  text-align: center;
   color: grey;
 }
 .target-total{
@@ -136,6 +155,10 @@
   margin-top: 1vh;
 }
 .end{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
   margin-top: 2vh;
 }
 </style>

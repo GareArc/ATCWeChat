@@ -15,6 +15,10 @@ import {vanOverlay} from "@/wxcomponents/overlay/index";
 import {vanPopup} from "@/wxcomponents/popup/index";
 // @ts-ignore
 import {vanField} from "@/wxcomponents/field/index";
+// @ts-ignore
+import {vanDialog} from "@/wxcomponents/dialog/index";
+// @ts-ignore
+import Dialog from "@/wxcomponents/dialog/dialog";
 import {deleteOrderByUUID} from "@/api/requests/order";
 
 export default defineComponent({
@@ -35,7 +39,8 @@ export default defineComponent({
         vanOverlay,
         vanLoading,
         vanField,
-        vanPopup
+        vanPopup,
+        vanDialog
     },
     data() {
         return {
@@ -55,17 +60,24 @@ export default defineComponent({
             }
         },
         async deleteOrder(): Promise<void>{
+            this.isLoading = true;
             const response = await deleteOrderByUUID(this.password, this.uuid);
             if(response.code !== 0){
-                console.log(response.errorDescription);
+                this.isLoading = false;
                 this.showPasswordInput = false;
+                await Dialog.alert({
+                   context: this,
+                   title: '密码错误或网络错误',
+                   message: response.errorDescription,
+                });
                 return ;
             }
+            this.isLoading = false;
             this.showPasswordInput = false;
             this.$emit("close-order-popup");
         },
         onPopupClose(): void{
-            (this as any).showPopup = false;
+            (this as any).showPasswordInput = false;
         },
         onPasswordChange(e: any): void{
             (this as any).password = e.detail.value;

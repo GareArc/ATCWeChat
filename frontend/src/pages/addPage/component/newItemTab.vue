@@ -2,7 +2,16 @@
   <view class="container">
 <!--    relation-->
     <view class="content-container">
-      <van-row class="share-type-wrapper" gutter="15">
+      <van-dialog id="van-dialog" />
+      <van-row style="width: 100%;" gutter="15" class="item-description-wrapper">
+        <van-col>
+          <view class="item-description-title">物品备注:</view>
+        </van-col>
+        <van-col>
+          <van-field :value="itemInfo.description" @change.native="onDescriptionChange"/>
+        </van-col>
+      </van-row>
+      <van-row class="share-type-wrapper" gutter="15" style="width: 100%">
         <van-col>
           <view>选择类型:</view>
         </van-col>
@@ -20,7 +29,7 @@
         </van-col>
       </van-row>
       <!--    shared option-->
-      <van-row class="shared-option-wrapper" gutter="20" v-if="showSharedRadio">
+      <van-row class="shared-option-wrapper" gutter="20" v-if="showSharedRadio"  style="width: 100%">
         <van-col>
           <view>具体是指:</view>
         </van-col>
@@ -46,7 +55,7 @@
         </van-col>
       </van-row>
       <!--individual option-->
-      <van-row class="individual-option-wrapper" gutter="20" v-if="showIndividualRadio">
+      <van-row class="individual-option-wrapper" gutter="20" v-if="showIndividualRadio"  style="width: 100%">
         <van-col>
           <view>选择对象:</view>
         </van-col>
@@ -62,27 +71,27 @@
         </van-col>
       </van-row>
       <!--    price-->
-      <van-row class="price-input-title">
+      <van-row class="price-input-title"  style="width: 100%">
         <view>输入价格:</view>
       </van-row>
-      <van-row class="price-input-content">
+      <van-row class="price-input-content"  style="width: 100%">
         <van-stepper min="0.01" step="0.01" decimal-length="2"
                      input-width="150"
                      button-size="40"
                      @change.native="onPriceChange"/>
       </van-row>
       <!--    quantity-->
-      <van-row class="quantity-input-title">
+      <van-row class="quantity-input-title"  style="width: 100%">
         <view>输入数量:</view>
       </van-row>
-      <van-row class="quantity-input-content">
+      <van-row class="quantity-input-content"  style="width: 100%">
         <van-stepper min="1" step="1"
                      input-width="150"
                      button-size="40"
                      @change.native="onQuantityChange"/>
       </van-row>
       <!--    taxed-->
-      <van-row class="tax-switch-wrapper" gutter="50">
+      <van-row class="tax-switch-wrapper" gutter="50"  style="width: 100%">
         <van-col>
           <view class="tax-switch-left-title">是否收税:</view>
         </van-col>
@@ -93,7 +102,7 @@
         </van-col>
       </van-row>
       <!--  submit-->
-      <van-row class="submit-wrapper">
+      <van-row class="submit-wrapper"  style="width: 100%">
         <van-button type="primary"
                     custom-style="width:50vw"
                     @click="submit">
@@ -117,7 +126,20 @@
   align-items: center;
   margin: 8vh 5vw 0 5vw;
 }
+.item-description-wrapper{
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  height: 44px;
+}
+.item-description-title{
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  height: 44px;
+}
 .share-type-wrapper{
+  margin-top: 5vh;
   display: flex;
   align-items: center;
   justify-content: flex-start;
@@ -176,8 +198,5 @@
   display: flex;
   justify-content: center;
   align-items: center;
-}
-van-row{
-  width: 100%;
 }
 </style>

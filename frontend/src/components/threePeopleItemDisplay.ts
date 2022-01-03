@@ -20,6 +20,10 @@ export default defineComponent({
         item: {
             required: true,
             type: Object as PropType<Item>
+        },
+        itemIndex: {
+            required: true,
+            type: Number
         }
     },
     data(){
@@ -29,7 +33,7 @@ export default defineComponent({
     },
     methods: {
         deleteItem(): void{
-            this.orderStore.currentOrder.delFromThreePeople(this.item);
+            this.orderStore.currentOrder.delFromThreePeople(this.item, this.itemIndex);
         }
     },
     computed: {

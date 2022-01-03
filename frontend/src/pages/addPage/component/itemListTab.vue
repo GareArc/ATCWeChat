@@ -12,8 +12,8 @@
       </van-cell>
     </van-row>
     <van-row>
-      <three-people-item-display v-for="item in getThreePeopleList"
-                                 :key="item" :item="item"/>
+      <three-people-item-display v-for="(item, index) in getThreePeopleList"
+                                 :key="index" :item="item" :itemIndex="index"/>
     </van-row>
     <!--    Target 1-->
     <van-row>
@@ -27,8 +27,8 @@
       </van-cell>
     </van-row>
     <van-row>
-      <target-item-display v-for="item in getTarget1List"
-                           :key="item" :item="item" :target="1"/>
+      <target-item-display v-for="(item,index) in getTarget1List"
+                           :key="index" :item="item" :itemIndex="index" :target="1"/>
     </van-row>
     <!--    Target 2-->
     <van-row>
@@ -42,8 +42,8 @@
       </van-cell>
     </van-row>
       <van-row>
-        <target-item-display v-for="item in getTarget2List"
-                             :key="item" :item="item" :target="2"/>
+        <target-item-display v-for="(item,index) in getTarget2List"
+                             :key="index" :item="item" :itemIndex="index" :target="2"/>
       </van-row>
   </view>
 </template>

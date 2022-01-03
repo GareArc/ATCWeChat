@@ -61,7 +61,6 @@ export default defineComponent({
             this.itemInfo.isTaxed = e.detail;
         },
         async submit(): Promise<void>{
-            console.log(this.isSubmitting)
             if(this.isSubmitting) return ;
             this.isSubmitting = true;
             const item: Item = {
@@ -95,7 +94,7 @@ export default defineComponent({
                 icon: "success",
                 duration: 1000
             })
-            await new Promise(resolve => setTimeout(resolve, 1000));
+            await new Promise(resolve => setTimeout(resolve, 600));
             this.isSubmitting = false;
         }
     },

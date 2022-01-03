@@ -31,20 +31,35 @@ export class Order{
         this.Fees = Fees;
     }
 
-    delFromThreePeople(targetItem: Item): void {
-        this.ThreePeople.splice(this.ThreePeople.findIndex(
-            item => {return targetItem === item}),
-          1);
+    delFromThreePeople(targetItem: Item, index=-1): void {
+        if(index !== -1){
+            this.ThreePeople.splice(index, 1);
+        }
+        else {
+            this.ThreePeople.splice(this.ThreePeople.findIndex(
+                item => {return targetItem === item}),
+              1);
+        }
     }
-    delFromTarget1(targetItem: Item): void {
-        this.Target1.splice(this.Target1.findIndex(
-            item => {return targetItem === item}),
-          1);
+    delFromTarget1(targetItem: Item, index=-1): void {
+        if(index !== -1){
+            this.Target1.splice(index, 1);
+        }
+        else{
+            this.Target1.splice(this.Target1.findIndex(
+                item => {return targetItem === item}),
+              1);
+        }
     }
-    delFromTarget2(targetItem: Item): void {
-        this.Target2.splice(this.Target2.findIndex(
-            item => {return targetItem === item}),
-          1);
+    delFromTarget2(targetItem: Item, index=-1): void {
+        if(index !== -1){
+            this.Target2.splice(index, 1);
+        }
+        else{
+            this.Target2.splice(this.Target2.findIndex(
+                item => {return targetItem === item}),
+              1);
+        }
     }
 
     addToThreePeople(item: Item): void {

@@ -21,6 +21,10 @@ export default defineComponent({
             required: true,
             type: Object as PropType<Item>
         },
+        itemIndex: {
+            required: true,
+            type: Number
+        },
         target: {
             required: true,
             type: Number
@@ -33,8 +37,8 @@ export default defineComponent({
     },
     methods: {
         deleteItem(): void{
-            if( this.target === 1) this.orderStore.currentOrder.delFromTarget1(this.item);
-            else this.orderStore.currentOrder.delFromTarget2(this.item);
+            if(this.target === 1) this.orderStore.currentOrder.delFromTarget1(this.item, this.itemIndex);
+            else this.orderStore.currentOrder.delFromTarget2(this.item, this.itemIndex);
         }
     },
     computed: {

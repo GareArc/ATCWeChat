@@ -67,9 +67,9 @@
         "usingComponents" : true
     },
     "networkTimeout" : {
-        "request" : 8000,
-        "uploadFile": 8000,
-        "connectSocket": 8000,
-        "downloadFile": 8000
+        "request" : 20000,
+        "uploadFile": 20000,
+        "connectSocket": 20000,
+        "downloadFile": 20000
     }
 }

@@ -118,6 +118,7 @@ export default defineComponent({
                 icon: "success",
                 duration: 1000
             })
+            this.itemInfo.description = "物品";
             await new Promise(resolve => setTimeout(resolve, 600));
             this.isSubmitting = false;
         }

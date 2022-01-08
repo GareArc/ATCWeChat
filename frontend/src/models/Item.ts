@@ -1,6 +1,7 @@
 export interface Item {
     price: number;
     quantity: number;
+    description: string;
     isTaxed: boolean;
     relation: Relation;
     shareType: ShareType | undefined;

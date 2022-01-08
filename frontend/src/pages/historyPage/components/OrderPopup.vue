@@ -68,7 +68,7 @@
         <view v-if="order.ThreePeople.length === 0" class="empty-list-display">暂无</view>
         <van-cell v-else v-for="(item, index) in order.ThreePeople"
                   :key="index"
-                  title="物品"
+                  :title="item.description"
                   :label="getItemDesc(item)"
                   :value="`${item.quantity} * $${item.price}`" />
       </van-cell-group>
@@ -79,7 +79,7 @@
         <view class="empty-list-display" v-if="order.Target1.length === 0">暂无</view>
         <van-cell v-else v-for="(item, index) in order.Target1"
                   :key="index"
-                  title="物品"
+                  :title="item.description"
                   :label="getItemDesc(item)"
                   :value="`${item.quantity} * $${item.price}`" />
       </van-cell-group>
@@ -90,7 +90,7 @@
         <view class="empty-list-display" v-if="order.Target2.length === 0">暂无</view>
         <van-cell v-else v-for="(item, index) in order.Target2"
                   :key="index"
-                  title="物品"
+                  :title="item.description"
                   :label="getItemDesc(item)"
                   :value="`${item.quantity} * $${item.price}`" />
       </van-cell-group>

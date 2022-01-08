@@ -16,6 +16,12 @@ import {vanStepper} from "../../../wxcomponents/stepper/index";
 import {vanSwitch} from "../../../wxcomponents/switch/index";
 // @ts-ignore
 import {vanButton} from "../../../wxcomponents/button/index";
+// @ts-ignore
+import {vanField} from "../../../wxcomponents/field/index";
+// @ts-ignore
+import {vanDialog} from "../../../wxcomponents/dialog/index";
+// @ts-ignore
+import Dialog from "../../../wxcomponents/dialog/dialog";
 
 export default defineComponent({
     components: {
@@ -25,12 +31,15 @@ export default defineComponent({
         vanStepper,
         vanRadioGroup,
         vanCell,
-        vanCellGroup
+        vanCellGroup,
+        vanField,
+        vanDialog
     },
     data() {
         return {
             orderStore: getModule(OrderStore),
             itemInfo: {
+                description: "物品",
                 price: 0.01,
                 shareType: "WITHTARGET2",
                 relation: "ALL",
@@ -42,6 +51,9 @@ export default defineComponent({
         }
     },
     methods: {
+        onDescriptionChange(e: any): void{
+          this.itemInfo.description = e.detail;
+        },
         onRelationChange(e: any): void{
             this.itemInfo.relation = e.detail;
         },
@@ -63,7 +75,19 @@ export default defineComponent({
         async submit(): Promise<void>{
             if(this.isSubmitting) return ;
             this.isSubmitting = true;
+            // validation
+            if(this.itemInfo.price >= 20 && this.itemInfo.description === "物品"){
+                await Dialog.alert({
+                    context: this,
+                    title: '请修改物品备注',
+                    message: '该物品价格超过$20, 请备注物品信息。'
+                });
+                this.isSubmitting = false;
+                return ;
+            }
+            //create item instance
             const item: Item = {
+                description: this.itemInfo.description,
                 price: this.itemInfo.price,
                 shareType: ShareType[this.itemInfo.shareType as keyof typeof ShareType],
                 relation: Relation[this.itemInfo.relation as keyof typeof Relation],
